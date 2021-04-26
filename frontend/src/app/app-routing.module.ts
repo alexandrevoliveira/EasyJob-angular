@@ -6,10 +6,10 @@ import { CompanyComponent } from './homepage/company/company.component';
 import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
- { path: '', component: HomepageComponent},
- { path: 'candidate', component: CandidateComponent },
- { path: 'company', component: CompanyComponent },
- { path: '**', component: HomepageComponent }
+  { path: '', component: HomepageComponent },
+  { path: 'candidate', component: CandidateComponent },
+  { path: 'company', component: CompanyComponent },
+  { path: '**', component: HomepageComponent }
 ];
 
 @NgModule({

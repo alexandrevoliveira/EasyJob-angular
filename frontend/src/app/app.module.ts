@@ -14,6 +14,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { CandidateComponent } from './homepage/candidate/candidate.component';
 import { CompanyComponent } from './homepage/company/company.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HeaderComponent } from './homepage/header/header.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HomepageComponent,
     CandidateComponent,
     CompanyComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

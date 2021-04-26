@@ -26,10 +26,12 @@
         </table>
 
         <div class="d-flex justify-content-between p-2">
-            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshOpportunities()">
+            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+                (pageChange)="refreshOpportunities()">
             </ngb-pagination>
 
-            <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshOpportunities()">
+            <select class="custom-select" style="width: auto" [(ngModel)]="pageSize"
+                (ngModelChange)="refreshOpportunities()">
                 <option [ngValue]="2">2 items por página</option>
                 <option [ngValue]="4">4 items por página</option>
                 <option [ngValue]="6">6 items por página</option>

@@ -1,0 +1,40 @@
+header{
+    display: flex;
+}
+
+.homepage-header-title {
+    color: #3F51B5;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.login {
+    display: grid;
+    margin: 0 auto;
+    grid-template-columns: 1fr 1fr;
+
+    font-size: 12px;
+    color: white;
+}
+
+.login .sign-in {
+    padding: 4px 16px;
+    margin: 0 auto;
+    box-shadow: 2px 2px 2px -1px rgba(60, 60, 60, .7);
+    border-radius: 4px;
+
+    background-color: teal;
+
+    cursor: pointer;
+}
+
+.login .sign-up {
+    padding: 4px 16px;
+    margin: 0 auto;
+    box-shadow: 2px 2px 2px -1px rgba(60, 60, 60, .7);
+    border-radius: 4px;
+
+    background-color: #3F51B5;
+
+    cursor: pointer;
+}

@@ -3,13 +3,19 @@
 DROP DATABASE IF EXISTS easyjob;
 CREATE DATABASE easyjob;
 
+-- DROP ONLY ROWS IN CASE U NEED TO USE SEED.JS --
+
+truncate table candidates RESTART IDENTITY cascade;
+truncate table companies RESTART IDENTITY cascade;
+truncate table vacancies RESTART IDENTITY cascade;
+
 -- CREATE TABLES --
 
 CREATE TABLE "candidates" (
     "id" SERIAL PRIMARY KEY,
     "name" text NOT NULL,
-    "cpf" int UNIQUE NOT NULL,
-    "address" text[],
+    "cpf" text UNIQUE NOT NULL,
+    "address" text,
     "curriculum" text[],
     "salary" int,
     "created_at" timestamp DEFAULT (now()),
@@ -19,8 +25,8 @@ CREATE TABLE "candidates" (
 CREATE TABLE "companies" (
     "id" SERIAL PRIMARY KEY,
     "name" text NOT NULL,
-    "cnpj" int UNIQUE NOT NULL,
-    "address" text[],
+    "cnpj" text UNIQUE NOT NULL,
+    "address" text,
     "created_at" timestamp DEFAULT (now()),
     "updated_at" timestamp DEFAULT (now())
 );
@@ -30,7 +36,9 @@ CREATE TABLE "vacancies" (
     "role" text NOT NULL,
     "type" text,
     "area" text,
+    "requirements" text[],
     "salary" int,
+    "quantity" int NOT NULL,
     "company_id" int,
     "created_at" timestamp DEFAULT (now()),
     "updated_at" timestamp DEFAULT (now())

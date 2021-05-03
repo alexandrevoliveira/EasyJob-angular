@@ -4,15 +4,19 @@ module.exports = {
 
     async index(req, res) {
         try {
-            let { filter, vacancy } = req.query
+            let { name, vacancy } = req.query
+            let term = []
 
-            if (!filter) filter = null
+            if (!name) name = null
             if (!vacancy) vacancy = null
 
-            let candidates = await Candidate.search({ filter, vacancy })
+            let candidates = await Candidate.search({ name, vacancy })
+
+            term.push({ name })
+            term.push({ vacancy })
 
             const search = {
-                term: filter,
+                term,
                 total: candidates.length
             }
 

@@ -1,6 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Candidate } from 'src/app/models/candidate.model';
 import { FilterService } from 'src/app/services/filter.service';
+
+interface SearchProps {
+  name: string | boolean;
+  vacancy: string | boolean;
+}
+
+interface ResProps {
+  candidates: Candidate[],
+  search: {
+    term: SearchProps[],
+    total: number;
+  }
+}
 
 @Component({
   selector: 'app-company',
@@ -15,36 +29,33 @@ export class CompanyComponent implements OnInit {
   page: number;
   pageSize: number;
   collectionSize: number;
-  public filter: string;
+  filter = new FormControl('');
 
   constructor(public filterService: FilterService) {
-    // this.refreshOpportunities();
-    this.service
   }
 
   ngOnInit(): void {
     this.loadGrid();
   }
 
-  loadGrid(filter?) {
-
-    this.filterService.getCandidates(filter).subscribe((res: Candidate[]) => {
-      this.opportunities = res;
+  loadGrid(filter?): void {
+    this.filterService.getCandidates(filter).subscribe((res: ResProps) => {
+      this.opportunities = res.candidates;
       this.page = 1;
       this.pageSize = 4;
       this.collectionSize = this.opportunities.length;
-      console.log(this.opportunities)
+      console.log(this.opportunities);
     });
   }
 
-  loadGridFilter() {
+  loadGridFilter(): void {
     this.loadGrid(this.filter);
   }
 
-  refreshOpportunities() {
-    this.opportunities = this.opportunities
-      .map((opportunity, i) => ({ id: i + 1, ...opportunity }))
-      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-  }
+  // refreshOpportunities() {
+  //   this.opportunities = this.opportunities
+  //     .map((opportunity, i) => ({ id: i + 1, ...opportunity }))
+  //     .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  // }
 
 }

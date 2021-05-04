@@ -10,6 +10,6 @@ export class FilterService {
     }
 
     getCandidates(filter?) {
-        return this.http.get(`${environment.urlService}/company?${filter}`)
+        return this.http.get(`${environment.urlService}/candidate?${filter}`)
     }
 }

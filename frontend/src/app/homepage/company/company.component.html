@@ -4,7 +4,7 @@
         <span>
             <form>
                 <div class="form-group form-inline">
-                    <input class="form-control ml-2" type="text" [(ngModel)]="filterService.filter"
+                    <input class="form-control ml-2" type="text" [(ngModel)]="filterService"
                         onchange="loadGridFilter()" />
                 </div>
             </form>
@@ -22,13 +22,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let opportunity of opportunities">
-                    <th scope="row">{{ opportunity.id }}</th>
-                    <td>{{ opportunity.name }}</td>
-                    <td>{{ opportunity.area}}</td>
-                    <td>{{ opportunity.role}}</td>
-                    <td>{{ opportunity.salaryExpectation | currency:'R$ '}}</td>
-                    <td><button mat-raised-button color="primary">Entrar em contato</button></td>
+                <tr *ngFor="let opportunity of opportunities; index as i">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>
+                        <ngb-highlight [result]="opportunity.name"></ngb-highlight>
+                    </td>
+                    <td>
+                        <ngb-highlight [result]="opportunity.vacancies_area"></ngb-highlight>
+                    </td>
+                    <td>
+                        <ngb-highlight [result]="opportunity.vacancies_role"></ngb-highlight>
+                    </td>
+                    <td>
+                        <ngb-highlight [result]="opportunity.salary | currency:'R$ '"></ngb-highlight>
+                    </td>
+                    <td>
+                        <button mat-raised-button color="primary">Entrar em contato</button>
+                    </td>
                 </tr>
             </tbody>
         </table>

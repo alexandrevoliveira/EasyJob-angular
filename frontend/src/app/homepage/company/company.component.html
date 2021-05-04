@@ -4,8 +4,7 @@
         <span>
             <form>
                 <div class="form-group form-inline">
-                    <input class="form-control ml-2" type="text" [(ngModel)]="filterService"
-                        onchange="loadGridFilter()" />
+                    Buscar: <input class="form-control ml-2" type="text" [formControl]="filter" (change)="loadGrid()" />
                 </div>
             </form>
         </span>
@@ -44,10 +43,11 @@
         </table>
 
         <div class="d-flex justify-content-between p-2">
-            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+                (pageChange)="loadGrid()" [rotate]="true" [maxSize]="5">
             </ngb-pagination>
 
-            <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+            <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="loadGrid()">
                 <option [ngValue]="2">2 items por página</option>
                 <option [ngValue]="4">4 items por página</option>
                 <option [ngValue]="6">6 items por página</option>

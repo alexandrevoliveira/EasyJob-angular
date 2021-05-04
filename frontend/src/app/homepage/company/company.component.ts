@@ -26,9 +26,9 @@ export class CompanyComponent implements OnInit {
 
   service: FilterService;
   opportunities: Candidate[];
-  page: number;
-  pageSize: number;
-  collectionSize: number;
+  page = 1;
+  pageSize = 4;
+  collectionSize = 0;
   filter = new FormControl('');
 
   constructor(public filterService: FilterService) {
@@ -38,24 +38,18 @@ export class CompanyComponent implements OnInit {
     this.loadGrid();
   }
 
-  loadGrid(filter?): void {
-    this.filterService.getCandidates(filter).subscribe((res: ResProps) => {
+  loadGrid(): void {
+    this.filterService.getCandidates(this.filter.value).subscribe((res: ResProps) => {
       this.opportunities = res.candidates;
-      this.page = 1;
-      this.pageSize = 4;
-      this.collectionSize = this.opportunities.length;
-      console.log(this.opportunities);
+      this.refreshOpportunities();
     });
   }
 
-  loadGridFilter(): void {
-    this.loadGrid(this.filter);
+  refreshOpportunities() {
+    this.collectionSize = this.opportunities.length;
+    this.opportunities = this.opportunities
+      .map((opportunity, i) => ({ id: i + 1, ...opportunity }))
+      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
-
-  // refreshOpportunities() {
-  //   this.opportunities = this.opportunities
-  //     .map((opportunity, i) => ({ id: i + 1, ...opportunity }))
-  //     .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-  // }
 
 }

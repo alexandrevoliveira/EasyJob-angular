@@ -10,6 +10,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { HomepageComponent } from './homepage/homepage.component';
 import { CandidateComponent } from './homepage/candidate/candidate.component';
@@ -35,6 +37,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatIconModule,
     MatTableModule,
+    MatPaginatorModule,
+    MatDialogModule,
     NgbModule,
     FormsModule,
     HttpClientModule

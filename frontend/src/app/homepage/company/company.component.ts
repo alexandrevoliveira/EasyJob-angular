@@ -1,92 +1,89 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { CandidateService } from '../../services/candidate.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { Candidate } from '../../models/candidate.model';
 
-interface Candidate {
-  id?: number;
-  name: string;
-  area: string;
-  role: string;
-  salaryExpectation: number
-}
-
-const OPPORTUNITIES: Candidate[] = [
+const CANDIDATES: Candidate[] = [
   {
     name: 'Jan Andrade Gorjão',
     area: 'IT',
     role: 'Software Enginner Junior',
-    salaryExpectation: 39519
+    salary: 39519
   },
   {
     name: 'Saúl Laureano Brião',
     area: 'Marketing',
     role: 'UI Designer',
-    salaryExpectation: 47071
+    salary: 47071
   },
   {
     name: 'Lázaro Gago Esparteiro',
     area: 'Business',
     role: 'CMO',
-    salaryExpectation: 292596
+    salary: 292596
   },
   {
     name: 'Eduarda Bandeira Matosinhos',
     area: 'IT',
     role: 'Software Enginner Mid-Level',
-    salaryExpectation: 42617
+    salary: 42617
   },
   {
     name: 'Liliana Lagos Sobral',
     area: 'Marketing',
     role: 'UX Designer',
-    salaryExpectation: 47071
+    salary: 47071
   },
   {
     name: 'Jonatã Ornelas Calado',
     area: 'Business',
     role: 'CEO',
-    salaryExpectation: 297768
+    salary: 297768
   },
   {
     name: 'Eric Castilho Damásio',
     area: 'IT',
     role: 'Software Enginner Senior',
-    salaryExpectation: 177719
+    salary: 177719
   },
   {
     name: 'Aires Chainho Godinho',
     area: 'Marketing',
     role: 'Sales Specialist',
-    salaryExpectation: 127139
+    salary: 127139
   },
   {
     name: 'Flávia Cambezes Pestana',
     area: 'Business',
     role: 'Accountant',
-    salaryExpectation: 61632
+    salary: 61632
   },
   {
     name: 'Ariane Cascais Fortes',
     area: 'IT',
     role: 'Software Architect',
-    salaryExpectation: 86129
+    salary: 86129
   },
   {
     name: 'Fabian Aleixo Caçoilo',
     area: 'Marketing',
     role: 'Marketing Manager',
-    salaryExpectation: 131958
+    salary: 131958
   },
   {
     name: 'Ludmila Cambezes Galindo',
     area: 'Business',
     role: 'Journalist',
-    salaryExpectation: 55212
+    salary: 55212
   },
   {
     name: 'Diana Lários Camacho',
     area: 'IT',
     role: 'Software Analyst',
-    salaryExpectation: 79017
+    salary: 79017
   }
 ]
 
@@ -96,23 +93,30 @@ const OPPORTUNITIES: Candidate[] = [
   styleUrls: ['./company.component.css']
 })
 export class CompanyComponent implements OnInit {
+  closeResult: string;
 
-  page = 1;
-  pageSize = 4;
-  collectionSize = OPPORTUNITIES.length;
-  opportunities: Candidate[];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor() {
-    this.refreshOpportunities();
-  }
+  displayedColumns: string[] = ['name', 'area', 'role', 'salary', 'contact'];
+  dataSource = new MatTableDataSource<Candidate>(CANDIDATES);
+
+  constructor(private service:CandidateService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
+    this.service.getCandidates()
   }
 
-  refreshOpportunities() {
-    this.opportunities = OPPORTUNITIES
-      .map((opportunity, i) => ({id: i + 1, ...opportunity}))
-      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  openVerticallyCentered(content) {
+    this.modalService.open(content, { centered: true });
+  }
+
+  public getCandidates() {
+    let resp = this.service.getCandidates()
+    resp.subscribe(candidate=>this.dataSource.data=candidate as Candidate[])
   }
 
 }

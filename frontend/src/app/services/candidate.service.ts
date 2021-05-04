@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "../../environments/environment"
 
 @Injectable({ providedIn: 'root' })
-export class FilterService {
+export class CandidateService {
 
     constructor(public http: HttpClient) {
         this.http = http;

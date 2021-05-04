@@ -9,6 +9,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
 
 import { HomepageComponent } from './homepage/homepage.component';
 import { CandidateComponent } from './homepage/candidate/candidate.component';
@@ -33,6 +34,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
+    MatTableModule,
     NgbModule,
     FormsModule,
     HttpClientModule

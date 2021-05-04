@@ -1,10 +1,6 @@
-export class Candidate {
-    public name: string;
-    public area: string;
-    public role: string;
-    public salary: number;
-
-    constructor() {
-
-    }
+export interface Candidate {
+    name: string;
+    area: string;
+    role: string;
+    salary: number;
 }

@@ -1,48 +1,74 @@
+<!-- <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Gerenciamento de carros</li>
+    </ol>
+</nav>
+<div class="container">
+    <div class="card list-car">
+        <h5 class="card-header">Lista de carros</h5>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">role</th>
+                        <th scope="col">type</th>
+                        <th scope="col">area</th>
+                        <th scope="col">salary</th>
+                        <th scope="col">quantity</th>
+                        <th scope="col">requirements</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let vacancy of vacancies.candidates">
+                        <td>{{vacancy.id}}</td>
+                        <td>{{vacancy.role}}</td>
+                        <td>{{vacancy.type}}</td>
+                        <td>{{vacancy.area}}</td>
+                        <td>{{vacancy.salary | currency}}</td>
+                        <td>{{vacancy.quantity}}</td>
+                        <td>{{vacancy.requirements}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div> -->
+
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 <div class="card" style="width: 60%; margin: 3% auto;">
     <div class="card-body d-flex flex-column">
         <h1 class="align-self-center">Lista de Vagas</h1>
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Empresa</th>
-                    <th scope="col">Vagas</th>
-                    <th scope="col">Requisitos</th>
-                    <th scope="col">Cargo</th>
-                    <th scope="col">Salário</th>
-                    <th scope="col">Aplicar</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let opportunity of opportunities">
-                    <th scope="row">{{ opportunity.id }}</th>
-                    <td>
-                        <img [src]="'https://upload.wikimedia.org/wikipedia/commons/' + opportunity.companyLogo"
-                            class="mr-2" style="width: 20px"> {{ opportunity.name }}
-                    </td>
-                    <td>{{ opportunity.vacancies}}</td>
-                    <td>{{ opportunity.required}}</td>
-                    <td>{{ opportunity.role}}</td>
-                    <td>{{ opportunity.salary | currency:'R$ '}}</td>
-                    <td><button mat-raised-button color="primary">Aplicar</button></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div class="d-flex justify-content-between p-2">
-            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-                (pageChange)="refreshOpportunities()">
-            </ngb-pagination>
-
-            <select class="custom-select" style="width: auto" [(ngModel)]="pageSize"
-                (ngModelChange)="refreshOpportunities()">
-                <option [ngValue]="6">6 items por página</option>
-                <option [ngValue]="8">8 items por página</option>
-                <option [ngValue]="10">10 items por página</option>
-            </select>
+        <div class="card list-car">
+            <h5 class="card-header">Lista de carros</h5>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">role</th>
+                            <th scope="col">type</th>
+                            <th scope="col">area</th>
+                            <th scope="col">salary</th>
+                            <th scope="col">quantity</th>
+                            <th scope="col">requirements</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let vacancy of vacancies.candidates">
+                            <td>{{vacancy.id}}</td>
+                            <td>{{vacancy.role}}</td>
+                            <td>{{vacancy.type}}</td>
+                            <td>{{vacancy.area}}</td>
+                            <td>{{vacancy.salary | currency}}</td>
+                            <td>{{vacancy.quantity}}</td>
+                            <td>{{vacancy.requirements}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
     <div class="card" style="width: 60%; margin: 3% auto;">
@@ -65,8 +91,8 @@
         </div>
         <br>
         <h2 style="text-align: center;">Procurar por requisitos: </h2>
-        <label style="text-align: center; color: red;">Separar cada requisito por "/"</label>
-        <label style="text-align: center; color: red;">(Ex: requisito1/requisito2)</label>
+        <label style="text-align: center; color: red;">Separar cada requisito por "-"</label>
+        <label style="text-align: center; color: red;">(Ex: requisito1-requisito2-requisito3)</label>
         <div class="col">
             <div class="col">
                 <input type="search" class="form-control" id="inputRequisitos" [(ngModel)]='inputRequisitos'>

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { VacancyService } from 'src/app/services/vacancy.service';
+import { NgForm } from '@angular/forms';
+import { Vacancy } from 'src/app/models/vacancy';
 
 interface Opportunity {
   id?: number;
@@ -21,7 +24,7 @@ const OPPORTUNITIES: Opportunity[] = [
     name: 'Microsoft',
     vacancies: 1,
     companyLogo: 'f/f3/Flag_of_Russia.svg',
-    required: ['Java', 'Angular'],
+    required: 'Java/Angular',
     role: 'Software Enginner Junior',
     salary: 39519
   },
@@ -29,7 +32,7 @@ const OPPORTUNITIES: Opportunity[] = [
     name: 'IBM',
     vacancies: 1,
     companyLogo: 'c/c3/Flag_of_France.svg',
-    required: ['UX/UI', 'Photoshop'],
+    required: 'UX/UI/Photoshop',
     role: 'UI Designer',
     salary: 47071
   },
@@ -37,7 +40,7 @@ const OPPORTUNITIES: Opportunity[] = [
     name: 'IBM',
     vacancies: 10,
     companyLogo: 'b/ba/Flag_of_Germany.svg',
-    required: ['Java', 'Angular'],
+    required: 'Java/Angular',
     role: 'Java Developer',
     salary: 292596
   },
@@ -45,7 +48,7 @@ const OPPORTUNITIES: Opportunity[] = [
     name: 'Facebook',
     vacancies: 3,
     companyLogo: '5/5c/Flag_of_Portugal.svg',
-    required: ['Python', 'Django'],
+    required: 'Python/Django',
     role: 'Software Enginner Mid-Level',
     salary: 42617
   },
@@ -53,7 +56,7 @@ const OPPORTUNITIES: Opportunity[] = [
     name: 'Microsoft',
     vacancies: 4,
     companyLogo: 'c/cf/Flag_of_Canada.svg',
-    required: ['Python', 'Django'],
+    required: 'Python/Django',
     role: 'Python Developer',
     salary: 47071
   },
@@ -61,7 +64,7 @@ const OPPORTUNITIES: Opportunity[] = [
     name: 'Facebook',
     vacancies: 4,
     companyLogo: '2/21/Flag_of_Vietnam.svg',
-    required: ['Git', 'Python', 'Django'],
+    required: 'Git/Python/Django',
     role: 'Software Enginner',
     salary: 297768
   },
@@ -134,23 +137,26 @@ export class CandidateComponent implements OnInit {
   checkSalario: boolean;
   inputRequisitos: string;
 
-  page = 1;
-  pageSize = 6;
-  collectionSize = OPPORTUNITIES.length;
-  opportunities: Opportunity[];
+  vacancy = {} as Vacancy;
+  vacancies: Vacancy[];
 
-  constructor() {
-    this.refreshOpportunities();
+  urlQuantity: string = 'http://localhost:3001/vacancy?order=quantity';
+  urlSalary: string = 'http://localhost:3001/vacancy?order=salary';
+
+  constructor(private vacancyService: VacancyService) {
+
   }
 
   ngOnInit(): void {
     this.SetDefault();
+    this.getVacancies();
   }
 
-  //******* jogar la pro pre-sal e transformar private
-  SetDefault(): void {
-    this.checkVagas = true;
-    this.checkSalario = false;
+  getVacancies() {
+    this.vacancyService.getVacancies().subscribe((vacancies: Vacancy[]) => {
+      this.vacancies = vacancies;
+      console.log(vacancies);
+    });
   }
 
   filter(check: string) {
@@ -159,37 +165,36 @@ export class CandidateComponent implements OnInit {
       if (this.checkVagas == true) {
         this.checkVagas = true;
         this.checkSalario = false;
+        this.vacancyService.url = this.urlQuantity;
       }
       else {
         this.checkVagas = false;
         this.checkSalario = true;
+        this.vacancyService.url = this.urlSalary;
       }
     }
     else {
       if (this.checkSalario == true) {
         this.checkSalario = true;
         this.checkVagas = false;
+        this.vacancyService.url = this.urlSalary;
       }
       else {
         this.checkSalario = false;
         this.checkVagas = true;
+        this.vacancyService.url = this.urlQuantity;
       }
     }
-    // **************** apagar console log
-    console.log("Vagas :" + this.checkVagas);
-    console.log("Salario :" + this.checkSalario);
+    this.getVacancies();
   }
 
   search() {
 
   }
 
-
-  // **************** tornar void e escopo private
-  refreshOpportunities() {
-    this.opportunities = OPPORTUNITIES
-      .map((opportunity, i) => ({ id: i + 1, ...opportunity }))
-      .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  private SetDefault(): void {
+    this.checkVagas = true;
+    this.checkSalario = false;
   }
 
 }

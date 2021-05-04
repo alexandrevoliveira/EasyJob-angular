@@ -15,6 +15,7 @@ import { CandidateComponent } from './homepage/candidate/candidate.component';
 import { CompanyComponent } from './homepage/company/company.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './homepage/header/header.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { HeaderComponent } from './homepage/header/header.component';
     MatButtonModule,
     MatIconModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

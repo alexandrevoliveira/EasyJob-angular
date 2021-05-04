@@ -29,6 +29,8 @@ module.exports = {
             query += ` AND candidates.name ILIKE '%${name}%'`
         }
 
+        query += ` ORDER BY vacancies.role`
+
         const results = await db.query(query)
         return results.rows
     }

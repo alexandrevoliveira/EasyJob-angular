@@ -5,14 +5,16 @@ Base.init({ table: 'vacancies' })
 
 module.exports = {
     ...Base,
-    async search({ filter }) {
+    async search({ filter, order }) {
 
-        let query = ` SELECT * FROM vacancies `
+        let query = ` SELECT * FROM vacancies`
 
         if (filter) {
-            query += `order by ${filter} desc`;
+            query += ` WHERE requirements ILIKE '%${filter}%'`
         }
-
+        if (order) {
+            query += ` ORDER BY ${order} desc`;
+        }
 
         const results = await db.query(query)
         return results.rows

@@ -1,11 +1,11 @@
 const express = require('express')
 const routes = express.Router()
 
-const companies = require('./companies')
-const candidate = require('./candidates')
+const candidates = require('./candidates')
+const vacancies = require('./vacancies')
 
-routes.use("/company", companies)
-routes.use("/candidate", candidate)
+routes.use("/candidate", candidates)
+routes.use("/vacancy", vacancies)
 
 // Alias
 routes.get("/", (req, res) => {

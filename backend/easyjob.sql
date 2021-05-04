@@ -14,10 +14,11 @@ truncate table vacancies RESTART IDENTITY cascade;
 CREATE TABLE "candidates" (
     "id" SERIAL PRIMARY KEY,
     "name" text NOT NULL,
+    "email" text NOT NULL,
     "cpf" text UNIQUE NOT NULL,
     "address" text,
     "curriculum" text[],
-    "salary" int,
+    "salary" numeric(11,2),
     "created_at" timestamp DEFAULT (now()),
     "updated_at" timestamp DEFAULT (now())
 );
@@ -36,8 +37,8 @@ CREATE TABLE "vacancies" (
     "role" text NOT NULL,
     "type" text,
     "area" text,
-    "requirements" text[],
-    "salary" int,
+    "requirements" text,
+    "salary" numeric(11,2),
     "quantity" int NOT NULL,
     "company_id" int,
     "created_at" timestamp DEFAULT (now()),

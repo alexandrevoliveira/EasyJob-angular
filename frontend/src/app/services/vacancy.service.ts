@@ -17,12 +17,8 @@ export class VacancyService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
-
   getVacancies(): Observable<Vacancy[]> {
     return this.httpClient.get<Vacancy[]>(this.url)
       .pipe(retry(2))
   }
-
-
-
 }

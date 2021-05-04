@@ -180,6 +180,11 @@ export class CandidateComponent implements OnInit {
     console.log("Salario :" + this.checkSalario);
   }
 
+  search() {
+
+  }
+
+
   // **************** tornar void e escopo private
   refreshOpportunities() {
     this.opportunities = OPPORTUNITIES

@@ -5,15 +5,14 @@ Base.init({ table: 'candidates' })
 
 module.exports = {
     ...Base,
-    async search({ filter, vacancy }) {
+    async search({ name, vacancy }) {
 
         let query = `
             SELECT
-            candidates.name, candidates.cpf, candidates.address, candidates.salary,
-            applications.vacancy_id as applications_vacancy_id,
-            applications.candidate_id as applications_candidate_id,
-            vacancies.role as vacancies_role, vacancies.type as vacancies_type, 
-            vacancies.area as vacancies_area, vacancies.salary as vacancies_salary
+            candidates.name,
+            vacancies.area as vacancies_area,
+            vacancies.role as vacancies_role,
+            candidates.salary
             FROM candidates
             LEFT JOIN applications
                 ON (candidates.id = applications.candidate_id)
@@ -26,9 +25,8 @@ module.exports = {
             query += ` AND vacancies.role = '${vacancy}'`
         }
 
-        if (filter) {
-            query += ` AND (candidates.name ILIKE '%${filter}%'
-            OR candidates.cpf ILIKE '%${filter}%')`
+        if (name) {
+            query += ` AND candidates.name ILIKE '%${name}%'`
         }
 
         const results = await db.query(query)

@@ -1,12 +1,20 @@
 <div class="card" style="width: 60%; margin: 3% auto;">
     <div class="card-body d-flex flex-column">
         <h1 class="align-self-center">Lista de Candidatos</h1>
+        <span>
+            <form>
+                <div class="form-group form-inline">
+                    <input class="form-control ml-2" type="text" [(ngModel)]="filterService.filter"
+                        onchange="loadGridFilter()" />
+                </div>
+            </form>
+        </span>
 
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Empresa</th>
+                    <th scope="col">Candidato</th>
                     <th scope="col">Área</th>
                     <th scope="col">Cargo</th>
                     <th scope="col">Salário</th>
@@ -26,12 +34,10 @@
         </table>
 
         <div class="d-flex justify-content-between p-2">
-            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-                (pageChange)="refreshOpportunities()">
+            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
             </ngb-pagination>
 
-            <select class="custom-select" style="width: auto" [(ngModel)]="pageSize"
-                (ngModelChange)="refreshOpportunities()">
+            <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
                 <option [ngValue]="2">2 items por página</option>
                 <option [ngValue]="4">4 items por página</option>
                 <option [ngValue]="6">6 items por página</option>

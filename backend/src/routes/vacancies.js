@@ -3,6 +3,6 @@ const routes = express.Router()
 
 const VacancyController = require('../app/controllers/VacancyController')
 
-routes.get("/", VacancyController.indexSalary)
+routes.get("/", VacancyController.index)
 
 module.exports = routes

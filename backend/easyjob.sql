@@ -37,7 +37,7 @@ CREATE TABLE "vacancies" (
     "role" text NOT NULL,
     "type" text,
     "area" text,
-    "requirements" text[],
+    "requirements" text,
     "salary" numeric(11,2),
     "quantity" int NOT NULL,
     "company_id" int,

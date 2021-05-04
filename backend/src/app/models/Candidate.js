@@ -5,7 +5,7 @@ Base.init({ table: 'candidates' })
 
 module.exports = {
     ...Base,
-    async search({ name, vacancy }) {
+    async search({ filter }) {
 
         let query = `
             SELECT
@@ -21,12 +21,11 @@ module.exports = {
             WHERE 1 = 1
         `
 
-        if (vacancy) {
-            query += ` AND vacancies.role = '${vacancy}'`
-        }
-
-        if (name) {
-            query += ` AND candidates.name ILIKE '%${name}%'`
+        if (filter) {
+            query += ` 
+                AND vacancies.role ilike '%${filter}%'
+                OR candidates.name ilike '%${filter}%'
+`
         }
 
         query += ` ORDER BY vacancies.role`

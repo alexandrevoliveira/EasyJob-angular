@@ -1,4 +1,6 @@
-const Vacancy = require('../models/Vacancy')
+const VacancyClass = require('../models/Vacancy')
+
+let Vacancy = new VacancyClass()
 
 module.exports = {
     async index(req, res) {

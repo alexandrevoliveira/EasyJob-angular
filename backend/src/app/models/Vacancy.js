@@ -1,10 +1,12 @@
 const db = require('../../config/db')
 const Base = require('./Base')
 
-Base.init({ table: 'vacancies' })
+module.exports = class Vacancy extends Base {
 
-module.exports = {
-    ...Base,
+    constructor() {
+        super({ table: 'vacancies' })
+    }
+
     async search({ filter, order }) {
 
         let query = ` SELECT * FROM vacancies`

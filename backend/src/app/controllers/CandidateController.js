@@ -1,20 +1,19 @@
-const Candidate = require('../models/Candidate')
+const CandidateClass = require('../models/Candidate')
+
+let Candidate = new CandidateClass()
 
 module.exports = {
 
     async index(req, res) {
         try {
             let { filter } = req.query
-            let term = []
 
             if (!filter) filter = null
 
             let candidates = await Candidate.search({ filter })
 
-            term.push({ filter })
-
             const search = {
-                term,
+                term: filter,
                 total: candidates.length
             }
 

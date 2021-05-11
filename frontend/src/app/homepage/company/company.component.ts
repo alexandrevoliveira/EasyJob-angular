@@ -3,16 +3,11 @@ import { FormControl } from '@angular/forms';
 import { Candidate } from 'src/app/models/candidate.model';
 import { FilterService } from 'src/app/services/filter.service';
 
-interface SearchProps {
-  name: string | boolean;
-  vacancy: string | boolean;
-}
-
 interface ResProps {
   candidates: Candidate[],
   search: {
-    term: SearchProps[],
-    total: number;
+    term: string | boolean,
+    total: number
   }
 }
 

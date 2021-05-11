@@ -1,11 +1,12 @@
 const faker = require('faker')
 
-const Candidate = require('./src/app/models/Candidate')
-const Company = require('./src/app/models/Company')
-const Vacancy = require('./src/app/models/Vacancy')
-const Application = require('./src/app/models/Application')
+const CandidateModel = require('./src/app/models/Candidate')
+const CompanyModel = require('./src/app/models/Company')
+const VacancyModel = require('./src/app/models/Vacancy')
+const ApplicationModel = require('./src/app/models/Application')
 
 async function createCandidates() {
+    let Candidate = new CandidateModel()
     const candidates = []
 
     while (candidates.length < 20) {
@@ -23,6 +24,7 @@ async function createCandidates() {
 }
 
 async function createCompanies() {
+    let Company = new CompanyModel()
     const companies = []
 
     while (companies.length < 20) {
@@ -39,6 +41,7 @@ async function createCompanies() {
 }
 
 async function createVacancies() {
+    let Vacancy = new VacancyModel()
     const vacancies = []
 
     while (vacancies.length < 20) {
@@ -57,6 +60,7 @@ async function createVacancies() {
 }
 
 async function createApplications() {
+    let Application = new ApplicationModel()
     const applications = []
 
     while (applications.length < 20) {

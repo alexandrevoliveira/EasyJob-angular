@@ -1,8 +1,9 @@
 const Base = require('./Base')
 
-Base.init({ table: 'applications' })
+module.exports = class Application extends Base {
 
-module.exports = {
-    ...Base
-    // search(params)
+    constructor() {
+        super({ table: 'applications' })
+    }
+
 }

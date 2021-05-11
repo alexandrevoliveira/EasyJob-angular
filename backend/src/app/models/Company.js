@@ -1,7 +1,9 @@
 const Base = require('./Base')
 
-Base.init({ table: 'applications' })
+module.exports = class Company extends Base {
 
-module.exports = {
-    ...Base
+    constructor() {
+        super({ table: 'companies' })
+    }
+
 }
